@@ -4,8 +4,14 @@ import reduxLogger from 'redux-logger'
 //action types
 const INCREDMENT_COUNT = "INCREDMENT_COUNT"
 const DECREMENT_COUNT = "DECREMENT_COUNT"
-
+const NAME_CHANGE = "NAME_CHANGE"
 //action creators
+
+export let changeUserNameToMario = () => {
+    return {
+        type: NAME_CHANGE,
+    }
+}
 
 export const increment = (amount = 1) => {
     return {
@@ -22,24 +28,24 @@ export const decrement = (amount = 1) => {
 }
 
 let initialState = {
-    count: 0
+    count: 0,
+    name: "Zach"
 }
 
 let reducer = (state = initialState, action) => {
     switch(action.type){
         case INCREDMENT_COUNT:
-            state = {...state, count: state.count + action.amount}
-        break;
+            return {count: state.count + action.amount}
+       
         case DECREMENT_COUNT:
-            state = {...state, count: state.count - action.amount}
-        break;
+            return {...state, count: state.count - action.amount}
+  
+        case NAME_CHANGE:
+            return {...state, name: "Mario"}
         default:
-            console.log("Nothing Changed in state")
-        break;
-        
+            return state
+    
     }
-
-    return state
 }
 
 
